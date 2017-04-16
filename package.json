@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "poc": "babel-node ./poc.js"
+  },
+  "dependencies": {
+    "noble": "^1.7.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-stage-0": "^6.22.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "stage-0"
+    ]
+  }
+}
