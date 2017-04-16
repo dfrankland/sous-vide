@@ -8,62 +8,102 @@ const checkError = callback => (error, ...args) => {
   if (typeof callback === 'function') callback(...args);
 };
 
-const sendCommand = characteristic => {
-  let allData = '';
-  characteristic.on('data', data => {
-    const newData = data.toString('utf8');
-    allData += newData;
-    if (/\r/g.test(newData)) {
-      console.log(`DATA: ${allData}`); // eslint-disable-line no-console
-      allData = '';
-      process.exit();
-    }
-  });
-  characteristic.subscribe(
-    checkError(
-      () => {
-        characteristic.write(Buffer.from('get id card\r', 'utf8'), true, checkError());
-      },
-    ),
-  );
-};
+const connect = () => (
+  new Promise(
+    resolve => {
+      const queue = [];
 
-// Find the proper characteristic
-const characteristicsFound = characteristics => {
-  const foundCharacteristics = characteristics.filter(
-    characteristic => characteristic.uuid === DEVICE_CHARACTERISTIC_UUID,
-  );
-  if (foundCharacteristics.length < 1) return;
-  sendCommand(foundCharacteristics[0]);
-};
+      const sendCommand = characteristic => command => {
+        const previousPromise = Promise.resolve(queue.pop());
+        const promise = new Promise(
+          async sendCommandResolve => {
+            await previousPromise;
 
-// Get the proper service
-const servicesFound = services => {
-  const foundServices = services.filter(
-    service => service.uuid === DEVICE_SERVICE_UUID,
-  );
-  if (foundServices.length < 1) return;
-  const service = foundServices[0];
-  service.discoverCharacteristics([], checkError());
-  service.once('characteristicsDiscover', characteristicsFound);
-};
+            let allData = '';
+            const getData = data => {
+              const newData = data.toString('utf8');
+              allData += newData;
+              if (/\r/g.test(newData)) {
+                sendCommandResolve(allData);
+                characteristic.removeListener('data', getData);
+              }
+            };
+            characteristic.on('data', getData);
 
-// Connect to the device
-const peripheralFound = peripheral => {
-  peripheral.once('connect', () => {
-    peripheral.once('servicesDiscover', servicesFound);
-    peripheral.discoverServices([], checkError());
-  });
-  peripheral.connect(checkError());
-};
+            characteristic.write(
+              Buffer.from(`${command}\r`, 'utf8'),
+              true,
+              checkError(),
+            );
+          },
+        );
 
-// Wait for "poweredOn" event and start scanning
-noble.on('stateChange', state => {
-  if (state !== 'poweredOn') return;
-  noble.on('discover', peripheral => {
-    const { advertisement: { localName } } = peripheral;
-    if (localName !== 'Anova') return;
-    peripheralFound(peripheral);
-  });
-  noble.startScanning([], false);
-});
+        queue.push(promise);
+        return promise;
+      };
+
+      // Find the proper characteristic
+      const characteristicsFound = characteristics => {
+        const foundCharacteristics = characteristics.filter(
+          characteristic => characteristic.uuid === DEVICE_CHARACTERISTIC_UUID,
+        );
+        if (foundCharacteristics.length < 1) return;
+        const characteristic = foundCharacteristics[0];
+        characteristic.subscribe(
+          checkError(
+            () => {
+              resolve(sendCommand(characteristic));
+            },
+          ),
+        );
+      };
+
+      // Get the proper service
+      const servicesFound = services => {
+        const foundServices = services.filter(
+          service => service.uuid === DEVICE_SERVICE_UUID,
+        );
+        if (foundServices.length < 1) return;
+        const service = foundServices[0];
+        service.discoverCharacteristics([], checkError());
+        service.once('characteristicsDiscover', characteristicsFound);
+      };
+
+      // Connect to the device
+      const peripheralFound = peripheral => {
+        peripheral.once('servicesDiscover', servicesFound);
+        peripheral.once('connect', () => {
+          peripheral.discoverServices([], checkError());
+        });
+        peripheral.connect(checkError());
+      };
+
+      // Look for a peripheral with a local name of "Anova"
+      noble.on('discover', peripheral => {
+        const { advertisement: { localName } } = peripheral;
+        if (localName !== 'Anova') return;
+        peripheralFound(peripheral);
+      });
+
+      // Wait for "poweredOn" event and start scanning
+      noble.on('stateChange', state => {
+        if (state !== 'poweredOn') return;
+        noble.startScanning([], false);
+      });
+    },
+  )
+);
+
+const logPromiseResult = async promise => (
+  console.log('DATA:', await promise) // eslint-disable-line no-console
+);
+(async () => {
+  const sendCommand = await connect();
+  const promises = [
+    logPromiseResult(sendCommand('get id card')),
+    logPromiseResult(sendCommand('version')),
+    logPromiseResult(sendCommand('status')),
+  ];
+  await Promise.all(promises);
+  process.exit();
+})();
