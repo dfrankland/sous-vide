@@ -1,7 +1,7 @@
 {
   "name": "sous-vide",
   "description": "Node.js API to control Anova water circulators. So far, only tested on a 2nd generation Anova Precision Cooker.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "directories": {
     "doc": "docs"
   },
