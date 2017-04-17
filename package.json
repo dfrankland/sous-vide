@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/dfrankland/sous-vide#readme",
   "main": "./dist/index.js",
+  "files": [
+    "dist/index.js"
+  ],
   "scripts": {
     "build": "rollup -c ./rollup.config.js",
     "example": "babel-node ./example.js",
