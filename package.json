@@ -21,13 +21,11 @@
     "url": "https://github.com/dfrankland/sous-vide/issues"
   },
   "homepage": "https://github.com/dfrankland/sous-vide#readme",
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
+  "main": "./dist/index.js",
   "scripts": {
     "build": "rollup -c ./rollup.config.js",
-    "example": "babel-node ./example.js"
+    "example": "babel-node ./example.js",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "noble": "^1.7.0"
