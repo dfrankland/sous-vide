@@ -1,4 +1,26 @@
 {
+  "name": "node-anova",
+  "description": "Node.js API to control Anova water circulators. So far, only tested on a 2nd generation Anova Precision Cooker.",
+  "version": "1.0.0",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfrankland/node-anova.git"
+  },
+  "keywords": [
+    "anova",
+    "bluetooth",
+    "ble",
+    "cooking"
+  ],
+  "author": "Dylan Frankland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dfrankland/node-anova/issues"
+  },
+  "homepage": "https://github.com/dfrankland/node-anova#readme",
   "main": "lib/index.js",
   "scripts": {
     "example": "babel-node ./example.js"
