@@ -1,6 +1,7 @@
 {
+  "main": "lib/index.js",
   "scripts": {
-    "poc": "babel-node ./poc.js"
+    "example": "babel-node ./example.js"
   },
   "dependencies": {
     "noble": "^1.7.0"
