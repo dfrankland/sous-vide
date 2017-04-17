@@ -1,4 +1,4 @@
-# node-anova
+# sous-vide
 
 Node.js API to control Anova water circulators. So far, only tested on a 2nd
 generation Anova Precision Cooker.
@@ -53,4 +53,4 @@ for `anova.ble.commands.SET_NUMBER` is `10`.
 Wifi or HTTP requests: coming soon, maybe?
 
 [1]: https://github.com/sandeepmistry/noble#prerequisites
-[2]: https://github.com/dfrankland/node-anova/blob/master/docs/ble.md
+[2]: https://github.com/dfrankland/sous-vide/blob/master/docs/ble.md

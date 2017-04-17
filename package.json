@@ -1,5 +1,5 @@
 {
-  "name": "node-anova",
+  "name": "sous-vide",
   "description": "Node.js API to control Anova water circulators. So far, only tested on a 2nd generation Anova Precision Cooker.",
   "version": "1.0.0",
   "directories": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dfrankland/node-anova.git"
+    "url": "git+https://github.com/dfrankland/sous-vide.git"
   },
   "keywords": [
     "anova",
@@ -18,9 +18,9 @@
   "author": "Dylan Frankland",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dfrankland/node-anova/issues"
+    "url": "https://github.com/dfrankland/sous-vide/issues"
   },
-  "homepage": "https://github.com/dfrankland/node-anova#readme",
+  "homepage": "https://github.com/dfrankland/sous-vide#readme",
   "main": "dist/index.js",
   "files": [
     "dist"
