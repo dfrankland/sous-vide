@@ -21,8 +21,12 @@
     "url": "https://github.com/dfrankland/node-anova/issues"
   },
   "homepage": "https://github.com/dfrankland/node-anova#readme",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "rollup -c ./rollup.config.js",
     "example": "babel-node ./example.js"
   },
   "dependencies": {
@@ -31,7 +35,10 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-preset-env": "^1.1.8",
-    "babel-preset-stage-0": "^6.22.0"
+    "babel-preset-stage-0": "^6.22.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0"
   },
   "babel": {
     "presets": [
