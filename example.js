@@ -13,4 +13,9 @@ const log = async promise => (
   ];
   await Promise.all(promises);
   process.exit();
-})();
+})().catch(
+  err => {
+    console.error(err); // eslint-disable-line no-console
+    process.exit(1);
+  },
+);
