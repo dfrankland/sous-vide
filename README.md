@@ -14,11 +14,11 @@ just an API wrapper built with it.
 
 Bluetooth Low Energy (BLE): currently, the only supported API.
 
-#### `anova.ble.connect`
+#### `anova.ble.connect([macAddress])`
 
 Function to connect to an Anova device. Returns a promise that resolves to
-another function `sendCommand`. Currently there's no way of choosing between
-multiple devices.
+another function `sendCommand`. Providing a `macAddress` string, you may filter
+to connect to specific devices.
 
 ##### `sendCommand`
 
