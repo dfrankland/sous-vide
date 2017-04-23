@@ -31,6 +31,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
+    "crowd-control": "^1.0.0",
     "noble": "^1.7.0"
   },
   "devDependencies": {
