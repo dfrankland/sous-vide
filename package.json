@@ -21,6 +21,10 @@
     "url": "https://github.com/dfrankland/sous-vide/issues"
   },
   "homepage": "https://github.com/dfrankland/sous-vide#readme",
+  "contributors": [],
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "main": "./dist/index.js",
   "files": [
     "dist/index.js"
