@@ -8,6 +8,10 @@ generation Anova Precision Cooker.
 Make sure to meet all prerequisites set out by [`noble`][1]; this package is
 just an API wrapper built with it.
 
+## tl;dr
+
+[Go check out the `example.js`.][3]
+
 ## API
 
 ### `anova.ble`
@@ -50,6 +54,23 @@ for `anova.ble.commands.SET_NUMBER` is `10`.
 
 ### `anova.rest`
 
+##### `anova.rest.connect([credentials])`
+
+Function to set the credentials to be used for REST API calls.
+
+*   `credentials`: An optional object with the following required properties.
+
+    *   `id`: Anova device ID. Can be obtained with the BLE command
+        `anova.ble.commands.GET_ID_CARD` (see example).
+
+    *   `secretKey`: Anova device secret key. Can be obtained by
+        looking at the API calls made by the Anova app or by setting a new one
+        with the `anova.ble.commands.SET_NUMBER` command in conjunction with
+        `anova.ble.randomString`.
+
+Returns `undefined` if passing `credentials` object, otherwise returns an array
+of `[id, secretKey]`.
+
 ##### `anova.rest.sendCommand(url, [postBody])`
 
 Wrapper function for `fetch` to call Anova REST API.
@@ -85,3 +106,4 @@ Recipes API: coming soon...
 
 [1]: https://github.com/sandeepmistry/noble#prerequisites
 [2]: https://github.com/dfrankland/sous-vide/blob/master/docs/ble.md
+[3]: https://github.com/dfrankland/sous-vide/blob/master/example.js
