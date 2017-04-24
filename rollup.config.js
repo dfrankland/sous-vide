@@ -4,7 +4,7 @@ import babel from 'rollup-plugin-babel';
 export default {
   entry: './lib/index.js',
   format: 'cjs',
-  external: ['noble', 'dns', 'crowd-control'],
+  external: ['noble', 'dns', 'crowd-control', 'isomorphic-fetch'],
   plugins: [
     nodeResolve(),
     babel({
