@@ -1,22 +1,18 @@
 # sous-vide
 
-Node.js API to control Anova water circulators. So far, only tested on a 2nd
-generation Anova Precision Cooker.
+Node.js API to control Anova water circulators.
+
+**tl;dr** [go check out the `example.js`.][1]
+
+> Note: only tested on a 2nd generation Anova Precision Cooker.
 
 ## Prerequisites
 
-Make sure to meet all prerequisites set out by [`noble`][1]; this package is
-just an API wrapper built with it.
+Make sure to meet all prerequisites set out by [`noble`][2] to use the Bluetooth Low Energy (BLE) API.
 
-## tl;dr
+## APIs
 
-[Go check out the `example.js`.][3]
-
-## API
-
-### `anova.ble`
-
-Bluetooth Low Energy (BLE): currently, the only supported API.
+### Bluetooth Low Energy (BLE)
 
 #### `anova.ble.connect([macAddress])`
 
@@ -32,7 +28,7 @@ with the response from the device.
 #### `anova.ble.commands`
 
 An object with command functions that return strings to be sent to the Anova
-device with `sendCommand`. [Check out the docs][2] to understand more about the
+device with `sendCommand`. [Check out the docs][3] to understand more about the
 available commands.
 
 #### `anova.ble.constants`
@@ -52,7 +48,7 @@ Function to be used in conjuntion with `anova.ble.commands.SET_NUMBER`.
 Generates valid random strings, given a length as an integer. The valid length
 for `anova.ble.commands.SET_NUMBER` is `10`.
 
-### `anova.rest`
+### REST
 
 ##### `anova.rest.connect([credentials])`
 
@@ -88,6 +84,7 @@ Returns a promise that resolves to the JSON response of the API call.
 An object with properties of different API commands to be sent to Anova's REST
 API. Each command calls `anova.rest.sendCommand` with the proper URL, HTTP
 method, and `POST` body if required and returns a promise.
+[Check out the docs][4] to understand more about the available commands.
 
 #### `anova.rest.constants`
 
@@ -100,10 +97,11 @@ Functions that check the response from a few commands. Can be useful for
 checking whether timers are running, the device is cooking, or if there is an
 error with the device.
 
-### `anova.recipes`
+### Recipes
 
-Recipes API: coming soon...
+Recipes API coming soon...
 
-[1]: https://github.com/sandeepmistry/noble#prerequisites
-[2]: https://github.com/dfrankland/sous-vide/blob/master/docs/ble.md
-[3]: https://github.com/dfrankland/sous-vide/blob/master/example.js
+[1]: https://github.com/dfrankland/sous-vide/blob/master/example.js
+[2]: https://github.com/sandeepmistry/noble#prerequisites
+[3]: https://github.com/dfrankland/sous-vide/blob/master/docs/ble.md
+[4]: https://github.com/dfrankland/sous-vide/blob/master/docs/rest.md
