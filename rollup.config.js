@@ -4,7 +4,14 @@ import babel from 'rollup-plugin-babel';
 export default {
   entry: './lib/index.js',
   format: 'cjs',
-  external: ['noble', 'dns', 'crowd-control', 'isomorphic-fetch'],
+  external: [
+    'noble',
+    'dns',
+    'crowd-control',
+    'isomorphic-fetch',
+    'bitwise-rotation',
+    'net',
+  ],
   plugins: [
     nodeResolve(),
     babel({

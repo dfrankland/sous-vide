@@ -62,11 +62,12 @@ into a string until `\r` is received signaling the end.
 | `commands/SetLed`                | `set led %d %d %d`              | where `%d` is the value of red, green, and blue as an integer value (**only found in APK version 0.0.180 and does not work**) |
 | `commands/SetDeviceName`         | `set name %s`                   | where `%s` is the device name |
 | `commands/SetSecretKey`          | `set number %s`                 | where `%s` is the secret key, secret key should be 10 lowercase alphanumeric characters |
-| `commands/SpeakerOff`            | `set speaker off`               |       |
+| `commands/SpeakerOff`            | `set speaker %s`                | where `%s` is either `off` or `on` |
 | `commands/SetTargetTemperature`  | `set temp %f`                   | where `%f` is the temperature as a float value (should only work with a precision of 1 decimal place), max of 99.9C or 211.8F, min of 5.0C or 41.0F |
 | `commands/SetTimer`              | `set timer %d`                  | where `%d` is the time in minutes as an integer value, max of 6000, min of 0 |
 | `commands/SetTemperatureUnit`    | `set unit %s`                   | where `%s` is the short version of the temperature unit (`c` or `f`) |
 | `commands/SmartLinkStart`        | `smartlink start`               | returns `smart link run` if successful |
+| N/A                              | `speaker status`                | returns either `speaker is on` or `speaker is off` |
 | `commands/StartDevice`           | `start`                         |       |
 | `commands/StartTimer`            | `start time`                    |       |
 | `commands/DeviceStatus`          | `status`                        | should return one of the following: `running`, `stopped`, `low water`, `heater error`, `power loss`, `user change parameter` |

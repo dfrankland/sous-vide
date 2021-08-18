@@ -35,6 +35,7 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
+    "bitwise-rotation": "^1.0.1",
     "crowd-control": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "noble": "^1.8.1"

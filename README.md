@@ -97,6 +97,54 @@ Functions that check the response from a few commands. Can be useful for
 checking whether timers are running, the device is cooking, or if there is an
 error with the device.
 
+### Wifi
+
+##### `anova.wifi.connect([options])`
+
+Function to start a TCP server that an Anova device can connect to. Returns a
+promise that resolves to another function `sendCommand`.
+
+*   `options`: An object with [options to pass to `server.listen`][5].
+    Defaults to the following:
+
+    ```js
+    {
+      port: 8080,
+    }
+    ```
+
+##### `sendCommand(commandString)`
+
+Function to queue a command to be sent to the Anova device. Returns a promise
+with the response from the device. `commandString` will be encoded, sent, and
+when the response is received it will be decoded automatically.
+
+#### `anova.wifi.commands`
+
+An object with command functions that return strings to be sent to the Anova
+device with `sendCommand`.
+
+#### `anova.wifi.constants`
+
+An object with constants that are used as constraints when configuring the
+Anova device with commands.
+
+#### `anova.wifi.responses`
+
+Functions that check the response from a few commands. Can be useful for
+checking whether timers are running, the device is cooking, or if there is an
+error with the device.
+
+#### `anova.wifi.encoder`
+
+Function to encode a string to be sent to an Anova device via TCP socket.
+Returns an encoded buffer.
+
+#### `anova.wifi.decoder`
+
+Function to decode an encoded buffer sent from an Anova device via TCP socket.
+Returns a string.
+
 ### Recipes
 
 Recipes API coming soon...
@@ -105,3 +153,4 @@ Recipes API coming soon...
 [2]: https://github.com/sandeepmistry/noble#prerequisites
 [3]: https://github.com/dfrankland/sous-vide/blob/master/docs/ble.md
 [4]: https://github.com/dfrankland/sous-vide/blob/master/docs/rest.md
+[5]: https://nodejs.org/api/net.html#net_server_listen_options_callback
